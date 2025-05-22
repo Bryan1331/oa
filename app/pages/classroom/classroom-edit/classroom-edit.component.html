@@ -1,0 +1,59 @@
+<form [formGroup]="form" (ngSubmit)="operate()" class="example-container">
+  <div [hidden]="true">
+    <mat-form-field>
+      <input matInput placeholder="ID" formControlName="idClassroom">
+    </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <input matInput placeholder="Code" formControlName="code">
+    <mat-error *ngIf="f['code'].errors?.['required']">Code is required</mat-error>
+    <mat-error *ngIf="f['code'].errors?.['minlength']">Code must be at least 3 characters</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="number" placeholder="Capacity" formControlName="capacity">
+    <mat-error *ngIf="f['capacity'].errors?.['required']">Capacity is required</mat-error>
+    <mat-error *ngIf="f['capacity'].errors?.['min']">Capacity must be greater than 0</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Course</mat-label>
+    <mat-select formControlName="course">
+      <mat-option *ngFor="let c of courses" [value]="c.idCourse">
+        {{c.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="f['course'].errors?.['required']">Course is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Teacher</mat-label>
+    <mat-select formControlName="teacher">
+      <mat-option *ngFor="let t of teachers" [value]="t.idTeacher">
+        {{t.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="f['teacher'].errors?.['required']">Teacher is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Career</mat-label>
+    <mat-select formControlName="career">
+      <mat-option *ngFor="let c of careers" [value]="c.idCareer">
+        {{c.name}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="f['career'].errors?.['required']">Career is required</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+    <mat-icon>save</mat-icon>
+    <span>Save</span>
+  </button>
+
+  <button mat-raised-button color="accent" type="button" routerLink="/pages/classroom">
+    <mat-icon>cancel</mat-icon>
+    <span>Cancel</span>
+  </button>
+</form>
